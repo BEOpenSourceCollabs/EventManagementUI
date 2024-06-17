@@ -3,7 +3,7 @@ import { createTheme } from "@mui/material";
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#fffff',
+      main: '#ffcb05',
     },
     secondary: {
       main: '#ff9933',
@@ -39,13 +39,22 @@ const theme = createTheme({
           {
             props: { variant: 'contained', color: 'inherit' },
             style: {
+              backgroundColor: 'teal', 
+              color: 'white',
               '&:hover': {
-                backgroundColor: 'rgba(0, 0, 0, 0.04)',
+                backgroundColor: 'rgba(0, 128, 128, 0.75)',
               }
             },
           }
       ],
   },
+  MuiAppBar: {
+    styleOverrides: {
+        root: {
+            background: 'white',
+        },
+    },
+},
     MuiMenuItem: {
       styleOverrides: {
           root: {

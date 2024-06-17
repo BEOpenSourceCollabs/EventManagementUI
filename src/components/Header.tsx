@@ -23,7 +23,7 @@ function Header() {
             </Button>
             <Button
               color="inherit"
-              sx={{ backgroundColor: 'teal', color: 'white', textTransform: 'none', fontWeight: 'bold', borderRadius: "8px" }}
+              sx={{ fontWeight: 'bold', borderRadius: "8px" }}
               variant="contained"
               disableElevation
             >
