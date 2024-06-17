@@ -1,38 +1,23 @@
-import { Box, Button, Toolbar } from "@mui/material";
-import AppBar from "@mui/material/AppBar";
 
 function Header() {
   return (
-    <Box>
-      <AppBar position="static" elevation={0}>
-        <Toolbar>
-          <Box
-            component="img"
-            height="100px"
-            width="100px"
-            alt="Logo"
-            src="/src/assets/logo.jpg" />
-          <Box sx={{ flexGrow: 1 }}></Box>
-          <Box sx={{ paddingX: '10px', display: 'flex' }}>
-            <Button
-              color="inherit"
-              sx={{ color: 'black', textTransform: 'none', fontWeight: 'bold' }}
-              variant="text"
-            >
-              Log in
-            </Button>
-            <Button
-              color="inherit"
-              sx={{ fontWeight: 'bold', borderRadius: "8px" }}
-              variant="contained"
-              disableElevation
-            >
-              Sign Up
-            </Button>
-          </Box>
-        </Toolbar>
-      </AppBar>
-    </Box>
+    <div className="navbar bg-base-100">
+      <div className="flex-1">
+        <a className="btn btn-ghost text-xl">EventManagement </a>
+      </div>
+      <div className="flex-none gap-2">
+        <div className="form-control">
+          <input type="text" placeholder="Search" className="input input-bordered w-24 md:w-auto" />
+        </div>
+      </div>
+
+      <div className="navbar-end flex gap-4">
+        <a>Log In</a>
+        <div className="bg-primary text-primary-content">
+          <button className="btn btn-ghost">Sign Up</button>
+        </div>
+      </div>
+    </div>
   );
 }
 
