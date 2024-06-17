@@ -8,10 +8,10 @@ import theme from "./theme.ts";
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-     <ThemeProvider theme={theme}>
-    <Router>
-      <App />
-    </Router>
+    <ThemeProvider theme={theme}>
+      <Router>
+        <App />
+      </Router>
     </ThemeProvider>
   </React.StrictMode>,
 )

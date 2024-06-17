@@ -11,4 +11,17 @@ npm run dev
 
 ```
 
+This project uses Material UI's Component Library, Typescript.
+
+For VSCode add below code in .vscode/settings.json
+
+```bash
+{
+    "files.associations": { "*.css": "postcss" },
+    "editor.detectIndentation": false,
+    "editor.insertSpaces": true,
+    "editor.tabSize": 2,
+}
+
+```
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
