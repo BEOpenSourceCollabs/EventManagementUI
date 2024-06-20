@@ -11,7 +11,7 @@ npm run dev
 
 ```
 
-This project uses Material UI's Component Library, Typescript.
+This project uses Daisy UI's Component Library, Typescript.
 
 For VSCode add below code in .vscode/settings.json
 
