@@ -1,4 +1,4 @@
-function Header() {
+function Header({ setModal }) {
   return (
     <div className="navbar bg-base-100">
       <div className="flex-1">
@@ -15,12 +15,15 @@ function Header() {
       </div>
 
       <div className="navbar-end flex gap-4">
-        <a>Log In</a>
-        <div>
-          <button className="btn btn-ghost  bg-primary text-primary-content">
-            Sign Up
-          </button>
-        </div>
+        <button className="link link-error no-underline">Log In</button>
+        <button
+          className="btn btn-ghost  bg-primary text-primary-content"
+          onClick={() => {
+            setModal(true);
+          }}
+        >
+          Sign Up
+        </button>
       </div>
     </div>
   );
