@@ -1,13 +1,13 @@
-import { useState } from "react";
 import Header from "../components/Header";
+import SignIn from "./SignIn";
 import SignUp from "./SignUp";
 
 function LandingPage() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
   return (
     <>
-      <Header setModal={setIsModalOpen} />
-      <SignUp open={isModalOpen} setModal={setIsModalOpen} />
+      <Header />
+      <SignUp />
+      <SignIn />
     </>
   );
 }
