@@ -15,12 +15,18 @@ function Header() {
       </div>
 
       <div className="navbar-end flex gap-4">
-        <a>Log In</a>
-        <div>
-          <button className="btn btn-ghost  bg-primary text-primary-content">
-            Sign Up
-          </button>
-        </div>
+        <button 
+          className="link link-error no-underline"
+          onClick={()=>document.getElementById('login_modal').showModal()}
+        >
+            Log In
+        </button>
+        <button
+          className="btn bg-primary text-primary-content rounded-md"
+          onClick={()=>document.getElementById('signup_modal').showModal()}
+        >
+          Sign Up
+        </button>
       </div>
     </div>
   );
