@@ -22,7 +22,7 @@ function Header() {
             Log In
         </button>
         <button
-          className="btn bg-primary text-primary-content rounded-md"
+          className="btn btn-primary text-primary-content rounded-md text-white"
           onClick={()=>document.getElementById('signup_modal').showModal()}
         >
           Sign Up

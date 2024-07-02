@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { GoogleLogin } from "@react-oauth/google";
 
 function SignUp() {
@@ -17,15 +16,111 @@ function SignUp() {
           <p className="py-4 text-center">
             Already a member? <a className="link no-underline link-primary" onClick={()=>{ document.getElementById('login_modal').showModal();document.getElementById('signup_modal')?.close()}} >Log In</a>
             <br />
-            <p className="py-4">
-            <GoogleLogin
-              
-              onSuccess={() => "Successfully Logged In"}
-              onError={() => "Error Logging in"}
-            />
+            <p className="py-4 mx-24">
+              <GoogleLogin
+                onSuccess={() => "Successfully Logged In"}
+                onError={() => "Error Logging in"}
+              />
             </p>
             <p className="py-4">
-              <button></button>
+              <button className="btn btn-outline gray rounded-md btn-wide" onClick={() => { document.getElementById('signup2_modal').showModal();document.getElementById('signup_modal')?.close()}} >Sign up with email</button>
+            </p>
+          </p>
+          <SignUpForm />
+        </div>
+      </dialog>
+    </>
+  );
+}
+
+function SignUpForm() {
+  return (
+    <>
+      <dialog id="signup2_modal" className="modal">
+        <div className="modal-box">
+          <button
+              className="btn btn-sm btn-circle btn-ghost absolute left-2 top-2"
+              onClick={() => {document.getElementById('signup_modal').showModal();document.getElementById('signup2_modal')?.close()}}
+            >
+              &lt;
+          </button>
+          <form method="dialog">
+            
+            <button
+              className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+            >
+              ✕
+            </button>
+          </form>
+          <p className="py-4 text-center">
+            <h1 className="font-bold text-center">Finish signing up</h1>
+            <label className="form-control w-full flex items-center pb-4">
+              <div className="label w-full max-w-xs">
+                <span className="label-text font-bold">Your name</span>
+              </div>
+              <input
+                type="text"
+                placeholder="Type here"
+                className="input input-bordered rounded-md w-full max-w-xs items-center"
+              />
+            </label>
+            <label className="form-control w-full flex items-center pb-4">
+              <div className="label w-full max-w-xs">
+                <span className="label-text font-bold">Email address</span>
+              </div>
+              <input
+                type="text"
+                placeholder="Type here"
+                className="input input-bordered rounded-md w-full max-w-xs items-center"
+              />
+            </label>
+            <label className="form-control w-full flex items-center pb-4">
+              <div className="label w-full max-w-xs">
+                <span className="label-text font-bold">Password</span>
+              </div>
+              <input
+                type="text"
+                placeholder="Type here"
+                className="input input-bordered rounded-md w-full max-w-xs items-center"
+              />
+            </label>
+            <label className="form-control w-full flex items-center pb-4">
+              <div className="label w-full max-w-xs">
+                <span className="label-text font-bold">Location</span>
+              </div>
+              <input
+                type="text"
+                placeholder="Type here"
+                className="input input-bordered rounded-md w-full max-w-xs items-center"
+              />
+            </label>
+            <label className="form-control mx-16 pb-4 ">
+              <div className="cursor-pointer label">
+                <span className="label-text font-bold">Age</span>
+              </div>
+              <label className="form-control pb-4 flex-row items-center ">
+                <input
+                  type="checkbox"
+                  className="checkbox checkbox-xs rounded-none checkbox-primary"
+                />
+                <div className="cursor-pointer label">
+                  <span className="label-text ml-2">I'm 18 years of age or older</span>
+                </div>
+              </label>
+            </label>
+            <button className="btn btn-error rounded-md text-white w-2/3 ">Sign up</button>
+
+            <p className="mt-4">
+              Already a member yet? &nbsp;
+              <a
+                className="link no-underline link-primary"
+                onClick={() => {
+                  document.getElementById("login_modal").showModal();
+                  document.getElementById("signup2_modal")?.close();
+                }}
+              >
+                Log in
+              </a>
             </p>
           </p>
         </div>
@@ -33,4 +128,5 @@ function SignUp() {
     </>
   );
 }
+
 export default SignUp;
