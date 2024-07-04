@@ -11,7 +11,7 @@ function SignIn() {
             </button>
           </form>
           <h1 className="font-bold text-center">Log in</h1>
-          <p className="py-4 text-center">
+          <div className="py-4 text-center">
             <p>
               Not a member yet? &nbsp;
               <a
@@ -77,16 +77,16 @@ function SignIn() {
                 Log in
               </button>
             </form>
-          </p>
+          </div>
 
           <div className="divider">or</div>
 
-          <p className="py-4 px-16">
+          <div className="py-4 px-16">
             <GoogleLogin
               onSuccess={() => "Successfully Logged In"}
               onError={() => "Error Logging in"}
             />
-          </p>
+          </div>
         </div>
       </dialog>
     </>

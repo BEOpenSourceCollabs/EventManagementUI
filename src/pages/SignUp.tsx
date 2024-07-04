@@ -11,7 +11,7 @@ function SignUp() {
             </button>
           </form>
           <h1 className="font-bold text-center">Sign Up</h1>
-          <p className="py-4 text-center">
+          <div className="py-4 text-center">
             Already a member?{" "}
             <a
               className="link no-underline link-primary"
@@ -29,12 +29,12 @@ function SignUp() {
               Log In
             </a>
             <br />
-            <p className="py-4 mx-24">
+            <div className="py-4 mx-24">
               <GoogleLogin
                 onSuccess={() => "Successfully Logged In"}
                 onError={() => "Error Logging in"}
               />
-            </p>
+            </div>
             <p className="py-4">
               <button
                 className="btn btn-outline gray rounded-md btn-wide"
@@ -52,7 +52,7 @@ function SignUp() {
                 Sign up with email
               </button>
             </p>
-          </p>
+          </div>
           <SignUpForm />
         </div>
       </dialog>
@@ -86,7 +86,7 @@ function SignUpForm() {
             </button>
           </form>
           <form></form>
-          <p className="py-4 text-center">
+          <div className="py-4 text-center">
             <h1 className="font-bold text-center">Finish signing up</h1>
             <form
               onSubmit={(e) => {
@@ -162,7 +162,7 @@ function SignUpForm() {
             </form>
 
             <p className="mt-4">
-              Already a member yet? &nbsp;
+              Already a member? &nbsp;
               <a
                 className="link no-underline link-primary"
                 onClick={() => {
@@ -179,7 +179,7 @@ function SignUpForm() {
                 Log in
               </a>
             </p>
-          </p>
+          </div>
         </div>
       </dialog>
     </>
