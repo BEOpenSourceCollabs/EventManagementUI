@@ -85,67 +85,81 @@ function SignUpForm() {
               ✕
             </button>
           </form>
+          <form></form>
           <p className="py-4 text-center">
             <h1 className="font-bold text-center">Finish signing up</h1>
-            <label className="form-control w-full flex items-center pb-4">
-              <div className="label w-full max-w-xs">
-                <span className="label-text font-bold">Your name</span>
-              </div>
-              <input
-                type="text"
-                placeholder="Type here"
-                className="input input-bordered rounded-md w-full max-w-xs items-center"
-              />
-            </label>
-            <label className="form-control w-full flex items-center pb-4">
-              <div className="label w-full max-w-xs">
-                <span className="label-text font-bold">Email address</span>
-              </div>
-              <input
-                type="text"
-                placeholder="Type here"
-                className="input input-bordered rounded-md w-full max-w-xs items-center"
-              />
-            </label>
-            <label className="form-control w-full flex items-center pb-4">
-              <div className="label w-full max-w-xs">
-                <span className="label-text font-bold">Password</span>
-              </div>
-              <input
-                type="text"
-                placeholder="Type here"
-                className="input input-bordered rounded-md w-full max-w-xs items-center"
-              />
-            </label>
-            <label className="form-control w-full flex items-center pb-4">
-              <div className="label w-full max-w-xs">
-                <span className="label-text font-bold">Location</span>
-              </div>
-              <input
-                type="text"
-                placeholder="Type here"
-                className="input input-bordered rounded-md w-full max-w-xs items-center"
-              />
-            </label>
-            <label className="form-control mx-16 pb-4 ">
-              <div className="cursor-pointer label">
-                <span className="label-text font-bold">Age</span>
-              </div>
-              <label className="form-control pb-4 flex-row items-center ">
-                <input
-                  type="checkbox"
-                  className="checkbox checkbox-xs rounded-none checkbox-primary"
-                />
-                <div className="cursor-pointer label">
-                  <span className="label-text ml-2">
-                    I'm 18 years of age or older
-                  </span>
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                console.log("email signup form submited");
+              }}
+            >
+              <label className="form-control w-full flex items-center pb-4">
+                <div className="label w-full max-w-xs">
+                  <span className="label-text font-bold">Your name</span>
                 </div>
+                <input
+                  type="text"
+                  placeholder="Type here"
+                  className="input input-bordered rounded-md w-full max-w-xs items-center"
+                  required
+                />
               </label>
-            </label>
-            <button className="btn btn-error rounded-md text-white w-2/3 ">
-              Sign up
-            </button>
+              <label className="form-control w-full flex items-center pb-4">
+                <div className="label w-full max-w-xs">
+                  <span className="label-text font-bold">Email address</span>
+                </div>
+                <input
+                  type="email"
+                  placeholder="Type here"
+                  className="input input-bordered rounded-md w-full max-w-xs items-center"
+                  required
+                />
+              </label>
+              <label className="form-control w-full flex items-center pb-4">
+                <div className="label w-full max-w-xs">
+                  <span className="label-text font-bold">Password</span>
+                </div>
+                <input
+                  type="password"
+                  placeholder="Type here"
+                  className="input input-bordered rounded-md w-full max-w-xs items-center"
+                  required
+                  minLength={8}
+                />
+              </label>
+              <label className="form-control w-full flex items-center pb-4">
+                <div className="label w-full max-w-xs">
+                  <span className="label-text font-bold">Location</span>
+                </div>
+                <input
+                  type="text"
+                  placeholder="Type here"
+                  className="input input-bordered rounded-md w-full max-w-xs items-center"
+                  required
+                />
+              </label>
+              <label className="form-control mx-16 pb-4 ">
+                <div className="cursor-pointer label">
+                  <span className="label-text font-bold">Age</span>
+                </div>
+                <label className="form-control pb-4 flex-row items-center ">
+                  <input
+                    type="checkbox"
+                    className="checkbox checkbox-xs rounded-none checkbox-primary"
+                    required
+                  />
+                  <div className="cursor-pointer label">
+                    <span className="label-text ml-2">
+                      I'm 18 years of age or older
+                    </span>
+                  </div>
+                </label>
+              </label>
+              <button className="btn btn-error rounded-md text-white w-2/3 ">
+                Sign up
+              </button>
+            </form>
 
             <p className="mt-4">
               Already a member yet? &nbsp;
