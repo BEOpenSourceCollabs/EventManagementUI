@@ -17,14 +17,19 @@ function SignIn() {
               <a
                 className="link no-underline link-primary"
                 onClick={() => {
-                  document.getElementById("signup_modal").showModal();
-                  document.getElementById("login_modal")?.close();
+                  const signupModal = document.getElementById(
+                    "signup_modal"
+                  ) as HTMLDialogElement;
+                  signupModal.showModal();
+                  const loginModal = document.getElementById(
+                    "login_modal"
+                  ) as HTMLDialogElement;
+                  loginModal.close();
                 }}
               >
                 Sign up
               </a>
             </p>
-            
 
             <label className="form-control w-full flex items-center pb-4">
               <div className="label w-full max-w-xs">
@@ -44,10 +49,7 @@ function SignIn() {
                 </a>
               </div>
               <label className="input input-bordered rounded-md flex items-center w-full max-w-xs gap-2 ">
-                <input
-                  type="password"
-                  placeholder="Type here"
-                />
+                <input type="password" placeholder="Type here" />
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -64,18 +66,19 @@ function SignIn() {
                 </svg>
               </label>
             </label>
-            <button className="btn btn-error rounded-md text-white my-4 w-3/4">Log in</button>
-
+            <button className="btn btn-error rounded-md text-white my-4 w-3/4">
+              Log in
+            </button>
           </p>
 
           <div className="divider">or</div>
 
           <p className="py-4 px-16">
-              <GoogleLogin
-                onSuccess={() => "Successfully Logged In"}
-                onError={() => "Error Logging in"}
-              />
-            </p>
+            <GoogleLogin
+              onSuccess={() => "Successfully Logged In"}
+              onError={() => "Error Logging in"}
+            />
+          </p>
         </div>
       </dialog>
     </>

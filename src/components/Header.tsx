@@ -15,15 +15,25 @@ function Header() {
       </div>
 
       <div className="navbar-end flex gap-4">
-        <button 
+        <button
           className="link link-error no-underline"
-          onClick={()=>document.getElementById('login_modal').showModal()}
+          onClick={() => {
+            const loginModal = document.getElementById(
+              "login_modal"
+            ) as HTMLDialogElement;
+            loginModal.showModal();
+          }}
         >
-            Log In
+          Log In
         </button>
         <button
           className="btn btn-primary text-primary-content rounded-md text-white"
-          onClick={()=>document.getElementById('signup_modal').showModal()}
+          onClick={() => {
+            const signupModal = document.getElementById(
+              "signup_modal"
+            ) as HTMLDialogElement;
+            signupModal.showModal();
+          }}
         >
           Sign Up
         </button>

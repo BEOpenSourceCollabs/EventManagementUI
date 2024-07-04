@@ -6,15 +6,28 @@ function SignUp() {
       <dialog id="signup_modal" className="modal">
         <div className="modal-box">
           <form method="dialog">
-            <button
-              className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
-            >
+            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
               ✕
             </button>
           </form>
           <h1 className="font-bold text-center">Sign Up</h1>
           <p className="py-4 text-center">
-            Already a member? <a className="link no-underline link-primary" onClick={()=>{ document.getElementById('login_modal').showModal();document.getElementById('signup_modal')?.close()}} >Log In</a>
+            Already a member?{" "}
+            <a
+              className="link no-underline link-primary"
+              onClick={() => {
+                const loginModal = document.getElementById(
+                  "login_modal"
+                ) as HTMLDialogElement;
+                loginModal.showModal();
+                const signupModal = document.getElementById(
+                  "signup_modal"
+                ) as HTMLDialogElement;
+                signupModal.close();
+              }}
+            >
+              Log In
+            </a>
             <br />
             <p className="py-4 mx-24">
               <GoogleLogin
@@ -23,7 +36,21 @@ function SignUp() {
               />
             </p>
             <p className="py-4">
-              <button className="btn btn-outline gray rounded-md btn-wide" onClick={() => { document.getElementById('signup2_modal').showModal();document.getElementById('signup_modal')?.close()}} >Sign up with email</button>
+              <button
+                className="btn btn-outline gray rounded-md btn-wide"
+                onClick={() => {
+                  const signup2Modal = document.getElementById(
+                    "signup2_modal"
+                  ) as HTMLDialogElement;
+                  signup2Modal.showModal();
+                  const signupModal = document.getElementById(
+                    "signup_modal"
+                  ) as HTMLDialogElement;
+                  signupModal.close();
+                }}
+              >
+                Sign up with email
+              </button>
             </p>
           </p>
           <SignUpForm />
@@ -39,16 +66,22 @@ function SignUpForm() {
       <dialog id="signup2_modal" className="modal">
         <div className="modal-box">
           <button
-              className="btn btn-sm btn-circle btn-ghost absolute left-2 top-2"
-              onClick={() => {document.getElementById('signup_modal').showModal();document.getElementById('signup2_modal')?.close()}}
-            >
-              &lt;
+            className="btn btn-sm btn-circle btn-ghost absolute left-2 top-2"
+            onClick={() => {
+              const signupModal = document.getElementById(
+                "signup_modal"
+              ) as HTMLDialogElement;
+              signupModal.showModal();
+              const signup2Modal = document.getElementById(
+                "signup2_modal"
+              ) as HTMLDialogElement;
+              signup2Modal.close();
+            }}
+          >
+            &lt;
           </button>
           <form method="dialog">
-            
-            <button
-              className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
-            >
+            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
               ✕
             </button>
           </form>
@@ -104,19 +137,29 @@ function SignUpForm() {
                   className="checkbox checkbox-xs rounded-none checkbox-primary"
                 />
                 <div className="cursor-pointer label">
-                  <span className="label-text ml-2">I'm 18 years of age or older</span>
+                  <span className="label-text ml-2">
+                    I'm 18 years of age or older
+                  </span>
                 </div>
               </label>
             </label>
-            <button className="btn btn-error rounded-md text-white w-2/3 ">Sign up</button>
+            <button className="btn btn-error rounded-md text-white w-2/3 ">
+              Sign up
+            </button>
 
             <p className="mt-4">
               Already a member yet? &nbsp;
               <a
                 className="link no-underline link-primary"
                 onClick={() => {
-                  document.getElementById("login_modal").showModal();
-                  document.getElementById("signup2_modal")?.close();
+                  const loginModal = document.getElementById(
+                    "login_modal"
+                  ) as HTMLDialogElement;
+                  loginModal.showModal();
+                  const signup2Modal = document.getElementById(
+                    "signup2_modal"
+                  ) as HTMLDialogElement;
+                  signup2Modal.close();
                 }}
               >
                 Log in
