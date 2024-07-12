@@ -27,7 +27,7 @@ function Header() {
           Log In
         </button>
         <button
-          className="btn btn-primary text-primary-content rounded-md text-white"
+          className="btn btn-primary rounded-md text-white"
           onClick={() => {
             const signupModal = document.getElementById(
               "signup_modal"
