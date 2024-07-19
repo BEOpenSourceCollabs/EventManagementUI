@@ -1,4 +1,5 @@
 import { GoogleLogin } from "@react-oauth/google";
+import { useState } from "react";
 
 function SignUp() {
   return (
@@ -75,6 +76,11 @@ function SignUp() {
 }
 
 function SignUpForm() {
+  const [nameRequired, setNameRequired] = useState(false);
+  const [emailRequired, setEmailRequired] = useState(false);
+  const [passwordRequired, setPasswordRequired] = useState(false);
+  const [ageRequired, setAgeRequired] = useState(false);
+  const [captchaRequired, setCaptchaRequired] = useState(false);
   return (
     <>
       <dialog id="signup2_modal" className="modal">
@@ -127,10 +133,17 @@ function SignUpForm() {
                 </div>
                 <input
                   type="text"
+                  id="name"
                   placeholder="Type here"
                   className="input input-bordered rounded-md w-full max-w-xs items-center"
                   required
                 />
+                <div className="label w-full max-w-xs">
+                {
+                  nameRequired ? (<p className="label-text" style={{color: "#C41E3A"}}>Name is required</p>): (null)
+                }
+                </div>
+                
               </label>
               <label className="form-control w-full flex items-center pb-4">
                 <div className="label w-full max-w-xs">
@@ -138,10 +151,17 @@ function SignUpForm() {
                 </div>
                 <input
                   type="email"
+                  id="email"
                   placeholder="Type here"
                   className="input input-bordered rounded-md w-full max-w-xs items-center"
                   required
                 />
+                <div className="label w-full max-w-xs">
+                {
+                  emailRequired ? (<p className="label-text" style={{color: "#C41E3A"}}>Email is required</p>): (null)
+                }
+                </div>
+                
               </label>
               <label className="form-control w-full flex items-center pb-4">
                 <div className="label w-full max-w-xs">
@@ -149,11 +169,17 @@ function SignUpForm() {
                 </div>
                 <input
                   type="password"
+                  id="password"
                   placeholder="Type here"
                   className="input input-bordered rounded-md w-full max-w-xs items-center"
                   required
                   minLength={8}
                 />
+                <div className="label w-full max-w-xs">
+                {
+                  passwordRequired ? (<p className="label-text" style={{color: "#C41E3A"}}>Password is required</p>): (null)
+                }
+                </div>
               </label>
               <label className="form-control w-full flex items-center pb-4">
                 <div className="label w-full max-w-xs">
@@ -172,6 +198,7 @@ function SignUpForm() {
                 </div>
                 <label className="form-control pb-4 flex-row items-center ">
                   <input
+                    id="age"
                     type="checkbox"
                     className="checkbox checkbox-xs rounded-none checkbox-primary"
                     required
@@ -181,9 +208,56 @@ function SignUpForm() {
                       I'm 18 years of age or older
                     </span>
                   </div>
+                  
                 </label>
+                <div className="label w-full max-w-xs">
+                  {
+                    ageRequired ? (<p className="label-text" style={{color: "#C41E3A"}}>You need to be 18 or older to continue</p>): (null)
+                  }
+                </div>
+                  
               </label>
-              <button className="btn btn-error rounded-md text-white w-2/3 ">
+              <button 
+              onClick={() =>
+                {
+                  let emailInput = document.querySelector("#email") as HTMLInputElement;
+                  let passwordInput = document.querySelector("#password") as HTMLInputElement;
+                  let nameInput = document.querySelector("#name") as HTMLInputElement;
+                  let ageInput = document.querySelector("#age") as HTMLInputElement;
+                  if(emailInput.value.length == 0)
+                  {
+                    console.log("Empty");
+                    setEmailRequired(true);
+                  }else{
+                    setEmailRequired(false);
+                  }
+
+                  if(passwordInput.value.length == 0)
+                  {
+                    console.log("Empty");
+                    setPasswordRequired(true)
+                  }else{
+                    setPasswordRequired(false)
+                  }
+
+                  if(nameInput.value.length == 0)
+                  {
+                    console.log("Empty");
+                    setNameRequired(true)
+                  }else{
+                    setNameRequired(false)
+                  }
+
+                  if(ageInput.checked == false)
+                  {
+                    console.log(ageInput.checked);
+                    setAgeRequired(true)
+                  }else{
+                    setAgeRequired(false)
+                  }
+                }
+              }
+              className="btn btn-error rounded-md text-white w-2/3 ">
                 Sign up
               </button>
             </form>

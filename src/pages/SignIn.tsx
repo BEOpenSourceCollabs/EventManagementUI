@@ -3,6 +3,8 @@ import { useState } from "react";
 
 function SignIn() {
   const [isPassword, setIsPassword] = useState(true);
+  const [emailRequired, setEmailRequired] = useState(false);
+  const [passwordRequired, setPasswordRequired] = useState(false);
   return (
     <>
       <dialog id="login_modal" className="modal">
@@ -47,8 +49,14 @@ function SignIn() {
                   type="email"
                   required
                   placeholder="Type here"
-                  className="input input-bordered rounded-md w-full max-w-xs items-center"
+                  id="emailSignIn"
+                  className="email input input-bordered rounded-md w-full max-w-xs items-center"
                 />
+                <div className="label w-full max-w-xs">
+                {
+                  emailRequired ? (<p style={{color: "#C41E3A"}}>Email is required</p>): (null)
+                }
+                </div>
               </label>
               <label className="form-control w-full flex items-center">
                 <div className="label w-full max-w-xs">
@@ -62,7 +70,9 @@ function SignIn() {
                     type={isPassword ? "password" : "text"}
                     placeholder="Type here"
                     required
+                    id="passwordSignIn"
                   />
+                  
                   <button onClick={() => setIsPassword(!isPassword)}>
                     {!isPassword ? (
                       <svg
@@ -102,8 +112,33 @@ function SignIn() {
                     )}
                   </button>
                 </label>
+                <div className="label w-full max-w-xs">
+                  {
+                    passwordRequired ? (<p style={{color: "#C41E3A"}}>Password is required</p>): (null)
+                  }
+                </div>
               </label>
-              <button className="btn btn-error rounded-md text-white my-4 w-3/4">
+              <button 
+              onClick={() =>
+                {
+                  let emailInput = document.querySelector("#emailSignIn") as HTMLInputElement;
+                  let passwordInput = document.querySelector("#passwordSignIn") as HTMLInputElement;
+                  if(emailInput.value.length == 0)
+                  {
+                    setEmailRequired(true);
+                  }else{
+                    setEmailRequired(false);
+                  }
+
+                  if(passwordInput.value.length == 0)
+                  {
+                    setPasswordRequired(true);
+                  }else{
+                    setPasswordRequired(false);
+                  }   
+                }
+              }
+              className="btn btn-error rounded-md text-white my-4 w-3/4">
                 Log in
               </button>
             </form>
