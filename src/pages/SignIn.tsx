@@ -5,6 +5,48 @@ function SignIn() {
   const [isPassword, setIsPassword] = useState(true);
   const [emailRequired, setEmailRequired] = useState(false);
   const [passwordRequired, setPasswordRequired] = useState(false);
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+  });
+
+  const [formErrors, setErrors] = useState({
+    email: '',
+    password: '',
+  });
+
+  const handleChange = (e: { target: { name: any; value: any; }; }) => {
+    const { name, value } = e.target;
+        setFormData({
+            ...formData,
+            [name]: value,
+        }); 
+  }
+
+  const handleSubmit = (e: { preventDefault: () => void; }) => {
+    const newErrors = validateForm(formData);
+    setErrors(newErrors);
+};
+const validateForm = (data: { email: any; password: any; username?: any; confirmPassword?: any; }) => {
+  const errors = {
+    email: '',
+    password: '',
+  };
+
+  if(!data.email.trim()) {
+    errors.email = 'Email is required';
+  }
+
+  if(!data.password) {
+    errors.password = 'Password is required';
+  }
+
+  return errors;
+};
+
+let dog = 1;
+
+
   return (
     <>
       <dialog id="login_modal" className="modal">
@@ -38,7 +80,10 @@ function SignIn() {
             <form
               onSubmit={(e) => {
                 e.preventDefault();
-                console.log("sign in form submited");
+                if(formErrors.email.length == 0 && formErrors.password.length == 0)
+                {
+                  console.log("email login form submited");
+                }
               }}
             >
               <label className="form-control w-full flex items-center pb-4">
@@ -49,13 +94,17 @@ function SignIn() {
                   type="email"
                   required
                   placeholder="Type here"
-                  id="emailSignIn"
+                  name="email"
                   className="email input input-bordered rounded-md w-full max-w-xs items-center"
+                  value={formData.email}
+                  onChange={handleChange}
                 />
                 <div className="label w-full max-w-xs">
-                {
-                  emailRequired ? (<p style={{color: "#C41E3A"}}>Email is required</p>): (null)
-                }
+                {formErrors.email && (
+                    <span style={{color: "#C41E3A"}} className="error-message">
+                      {formErrors.email}
+                    </span>
+                  )}
                 </div>
               </label>
               <label className="form-control w-full flex items-center">
@@ -70,7 +119,10 @@ function SignIn() {
                     type={isPassword ? "password" : "text"}
                     placeholder="Type here"
                     required
-                    id="passwordSignIn"
+                    name="password"
+                    onChange={handleChange}
+                    value={formData.password}
+                    className="passwordSignIn"
                   />
                   
                   <button onClick={() => setIsPassword(!isPassword)}>
@@ -113,31 +165,15 @@ function SignIn() {
                   </button>
                 </label>
                 <div className="label w-full max-w-xs">
-                  {
-                    passwordRequired ? (<p style={{color: "#C41E3A"}}>Password is required</p>): (null)
-                  }
+                  {formErrors.password && (
+                    <span style={{color: "#C41E3A"}} className="error-message">
+                      {formErrors.password}
+                    </span>
+                  )}
                 </div>
               </label>
-              <button 
-              onClick={() =>
-                {
-                  let emailInput = document.querySelector("#emailSignIn") as HTMLInputElement;
-                  let passwordInput = document.querySelector("#passwordSignIn") as HTMLInputElement;
-                  if(emailInput.value.length == 0)
-                  {
-                    setEmailRequired(true);
-                  }else{
-                    setEmailRequired(false);
-                  }
-
-                  if(passwordInput.value.length == 0)
-                  {
-                    setPasswordRequired(true);
-                  }else{
-                    setPasswordRequired(false);
-                  }   
-                }
-              }
+              <button
+              onClick={handleSubmit}
               className="btn btn-error rounded-md text-white my-4 w-3/4">
                 Log in
               </button>

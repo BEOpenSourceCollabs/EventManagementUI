@@ -81,6 +81,58 @@ function SignUpForm() {
   const [passwordRequired, setPasswordRequired] = useState(false);
   const [ageRequired, setAgeRequired] = useState(false);
   const [captchaRequired, setCaptchaRequired] = useState(false);
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+    name: '',
+    age: false,
+  });
+
+  const [formErrors, setErrors] = useState({
+    email: '',
+    password: '',
+    name: '',
+    age: '',
+  });
+
+  const handleChange = (e: { target: { name: any; value: any; checked: any;}; }) => {
+    const { name, value, checked } = e.target;
+      setFormData({
+          ...formData,
+          [name]: value,
+          age: checked,
+      });
+  }
+
+  const handleSubmit = (e: { preventDefault: () => void; }) => {
+    const newErrors = validateForm(formData);
+    setErrors(newErrors);
+};
+const validateForm = (data: { email: any; password: any; name: any; age: any; }) => {
+  const errors = {
+    email: '',
+    password: '',
+    name: '',
+    age: '',
+  };
+
+  if(!data.email.trim()) {
+    errors.email = 'Email is required';
+  }
+
+  if(!data.password.trim()) {
+    errors.password = 'Password is required';
+  }
+  if(!data.name.trim()) {
+    errors.name = 'Name is required';
+  }
+
+  if(data.age == false) {
+    errors.age = 'Age is required';
+  }
+
+  return errors;
+};
   return (
     <>
       <dialog id="signup2_modal" className="modal">
@@ -124,7 +176,10 @@ function SignUpForm() {
             <form
               onSubmit={(e) => {
                 e.preventDefault();
-                console.log("email signup form submited");
+                if(formErrors.email.length == 0 && formErrors.password.length == 0 && formErrors.name.length == 0 && formErrors.age.length == 0)
+                  {
+                    console.log("email signup form submited");
+                  }
               }}
             >
               <label className="form-control w-full flex items-center pb-4">
@@ -133,15 +188,19 @@ function SignUpForm() {
                 </div>
                 <input
                   type="text"
-                  id="name"
+                  name="name"
                   placeholder="Type here"
                   className="input input-bordered rounded-md w-full max-w-xs items-center"
                   required
+                  onChange={handleChange}
+                  //value={formData.name}
                 />
                 <div className="label w-full max-w-xs">
-                {
-                  nameRequired ? (<p className="label-text" style={{color: "#C41E3A"}}>Name is required</p>): (null)
-                }
+                {formErrors.name && (
+                    <span style={{color: "#C41E3A"}} className="error-message">
+                      {formErrors.name}
+                    </span>
+                  )}
                 </div>
                 
               </label>
@@ -151,15 +210,18 @@ function SignUpForm() {
                 </div>
                 <input
                   type="email"
-                  id="email"
                   placeholder="Type here"
-                  className="input input-bordered rounded-md w-full max-w-xs items-center"
-                  required
+                  name="email"
+                  className="email input input-bordered rounded-md w-full max-w-xs items-center"
+                  value={formData.email}
+                  onChange={handleChange}
                 />
                 <div className="label w-full max-w-xs">
-                {
-                  emailRequired ? (<p className="label-text" style={{color: "#C41E3A"}}>Email is required</p>): (null)
-                }
+                {formErrors.email && (
+                    <span style={{color: "#C41E3A"}} className="error-message">
+                      {formErrors.email}
+                    </span>
+                  )}
                 </div>
                 
               </label>
@@ -169,16 +231,20 @@ function SignUpForm() {
                 </div>
                 <input
                   type="password"
-                  id="password"
                   placeholder="Type here"
-                  className="input input-bordered rounded-md w-full max-w-xs items-center"
+                  className="passwordSignIn input input-bordered rounded-md w-full max-w-xs items-center"
                   required
                   minLength={8}
+                  name="password"
+                  onChange={handleChange}
+                  value={formData.password}
                 />
                 <div className="label w-full max-w-xs">
-                {
-                  passwordRequired ? (<p className="label-text" style={{color: "#C41E3A"}}>Password is required</p>): (null)
-                }
+                {formErrors.password && (
+                    <span style={{color: "#C41E3A"}} className="error-message">
+                      {formErrors.password}
+                    </span>
+                  )}
                 </div>
               </label>
               <label className="form-control w-full flex items-center pb-4">
@@ -198,10 +264,12 @@ function SignUpForm() {
                 </div>
                 <label className="form-control pb-4 flex-row items-center ">
                   <input
-                    id="age"
                     type="checkbox"
+                    name="age"
                     className="checkbox checkbox-xs rounded-none checkbox-primary"
                     required
+                    onChange={handleChange}
+                    checked={formData.age}
                   />
                   <div className="cursor-pointer label">
                     <span className="label-text ml-2">
@@ -211,52 +279,16 @@ function SignUpForm() {
                   
                 </label>
                 <div className="label w-full max-w-xs">
-                  {
-                    ageRequired ? (<p className="label-text" style={{color: "#C41E3A"}}>You need to be 18 or older to continue</p>): (null)
-                  }
+                  {formErrors.age && (
+                    <span style={{color: "#C41E3A"}} className="error-message">
+                      {formErrors.age}
+                    </span>
+                  )}
                 </div>
                   
               </label>
               <button 
-              onClick={() =>
-                {
-                  let emailInput = document.querySelector("#email") as HTMLInputElement;
-                  let passwordInput = document.querySelector("#password") as HTMLInputElement;
-                  let nameInput = document.querySelector("#name") as HTMLInputElement;
-                  let ageInput = document.querySelector("#age") as HTMLInputElement;
-                  if(emailInput.value.length == 0)
-                  {
-                    console.log("Empty");
-                    setEmailRequired(true);
-                  }else{
-                    setEmailRequired(false);
-                  }
-
-                  if(passwordInput.value.length == 0)
-                  {
-                    console.log("Empty");
-                    setPasswordRequired(true)
-                  }else{
-                    setPasswordRequired(false)
-                  }
-
-                  if(nameInput.value.length == 0)
-                  {
-                    console.log("Empty");
-                    setNameRequired(true)
-                  }else{
-                    setNameRequired(false)
-                  }
-
-                  if(ageInput.checked == false)
-                  {
-                    console.log(ageInput.checked);
-                    setAgeRequired(true)
-                  }else{
-                    setAgeRequired(false)
-                  }
-                }
-              }
+              onClick={handleSubmit}
               className="btn btn-error rounded-md text-white w-2/3 ">
                 Sign up
               </button>
