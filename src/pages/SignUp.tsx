@@ -1,4 +1,5 @@
 import { GoogleLogin } from "@react-oauth/google";
+import { useState } from "react";
 
 function SignUp() {
   return (
@@ -75,6 +76,63 @@ function SignUp() {
 }
 
 function SignUpForm() {
+  const [nameRequired, setNameRequired] = useState(false);
+  const [emailRequired, setEmailRequired] = useState(false);
+  const [passwordRequired, setPasswordRequired] = useState(false);
+  const [ageRequired, setAgeRequired] = useState(false);
+  const [captchaRequired, setCaptchaRequired] = useState(false);
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+    name: '',
+    age: false,
+  });
+
+  const [formErrors, setErrors] = useState({
+    email: '',
+    password: '',
+    name: '',
+    age: '',
+  });
+
+  const handleChange = (e: { target: { name: any; value: any; checked: any;}; }) => {
+    const { name, value, checked } = e.target;
+      setFormData({
+          ...formData,
+          [name]: value,
+          age: checked,
+      });
+  }
+
+  const handleSubmit = (e: { preventDefault: () => void; }) => {
+    const newErrors = validateForm(formData);
+    setErrors(newErrors);
+};
+const validateForm = (data: { email: any; password: any; name: any; age: any; }) => {
+  const errors = {
+    email: '',
+    password: '',
+    name: '',
+    age: '',
+  };
+
+  if(!data.email.trim()) {
+    errors.email = 'Email is required';
+  }
+
+  if(!data.password.trim()) {
+    errors.password = 'Password is required';
+  }
+  if(!data.name.trim()) {
+    errors.name = 'Name is required';
+  }
+
+  if(data.age == false) {
+    errors.age = 'Age is required';
+  }
+
+  return errors;
+};
   return (
     <>
       <dialog id="signup2_modal" className="modal">
@@ -118,7 +176,10 @@ function SignUpForm() {
             <form
               onSubmit={(e) => {
                 e.preventDefault();
-                console.log("email signup form submited");
+                if(formErrors.email.length == 0 && formErrors.password.length == 0 && formErrors.name.length == 0 && formErrors.age.length == 0)
+                  {
+                    console.log("email signup form submited");
+                  }
               }}
             >
               <label className="form-control w-full flex items-center pb-4">
@@ -127,10 +188,21 @@ function SignUpForm() {
                 </div>
                 <input
                   type="text"
+                  name="name"
                   placeholder="Type here"
                   className="input input-bordered rounded-md w-full max-w-xs items-center"
                   required
+                  onChange={handleChange}
+                  //value={formData.name}
                 />
+                <div className="label w-full max-w-xs">
+                {formErrors.name && (
+                    <span style={{color: "#C41E3A"}} className="error-message">
+                      {formErrors.name}
+                    </span>
+                  )}
+                </div>
+                
               </label>
               <label className="form-control w-full flex items-center pb-4">
                 <div className="label w-full max-w-xs">
@@ -139,9 +211,19 @@ function SignUpForm() {
                 <input
                   type="email"
                   placeholder="Type here"
-                  className="input input-bordered rounded-md w-full max-w-xs items-center"
-                  required
+                  name="email"
+                  className="email input input-bordered rounded-md w-full max-w-xs items-center"
+                  value={formData.email}
+                  onChange={handleChange}
                 />
+                <div className="label w-full max-w-xs">
+                {formErrors.email && (
+                    <span style={{color: "#C41E3A"}} className="error-message">
+                      {formErrors.email}
+                    </span>
+                  )}
+                </div>
+                
               </label>
               <label className="form-control w-full flex items-center pb-4">
                 <div className="label w-full max-w-xs">
@@ -150,10 +232,20 @@ function SignUpForm() {
                 <input
                   type="password"
                   placeholder="Type here"
-                  className="input input-bordered rounded-md w-full max-w-xs items-center"
+                  className="passwordSignIn input input-bordered rounded-md w-full max-w-xs items-center"
                   required
                   minLength={8}
+                  name="password"
+                  onChange={handleChange}
+                  value={formData.password}
                 />
+                <div className="label w-full max-w-xs">
+                {formErrors.password && (
+                    <span style={{color: "#C41E3A"}} className="error-message">
+                      {formErrors.password}
+                    </span>
+                  )}
+                </div>
               </label>
               <label className="form-control w-full flex items-center pb-4">
                 <div className="label w-full max-w-xs">
@@ -173,17 +265,31 @@ function SignUpForm() {
                 <label className="form-control pb-4 flex-row items-center ">
                   <input
                     type="checkbox"
+                    name="age"
                     className="checkbox checkbox-xs rounded-none checkbox-primary"
                     required
+                    onChange={handleChange}
+                    checked={formData.age}
                   />
                   <div className="cursor-pointer label">
                     <span className="label-text ml-2">
                       I'm 18 years of age or older
                     </span>
                   </div>
+                  
                 </label>
+                <div className="label w-full max-w-xs">
+                  {formErrors.age && (
+                    <span style={{color: "#C41E3A"}} className="error-message">
+                      {formErrors.age}
+                    </span>
+                  )}
+                </div>
+                  
               </label>
-              <button className="btn btn-error rounded-md text-white w-2/3 ">
+              <button 
+              onClick={handleSubmit}
+              className="btn btn-error rounded-md text-white w-2/3 ">
                 Sign up
               </button>
             </form>
